@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".DialerActivity">
+
+
+    <TextView
+        android:id="@+id/tv_activity_dialer_phone_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/activity_dialer_button_2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/activity_dialer_button_call"
+        android:layout_width="100dp"
+        android:layout_height="60dp"
+        android:layout_marginBottom="8dp"
+        android:onClick="onClickCallButton"
+        android:text="@string/activity_dialer_call_button_text"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/activity_dialer_button_delete"
+        app:layout_constraintStart_toEndOf="@+id/activity_dialer_button_text_message" />
+
+    <Button
+        android:id="@+id/activity_dialer_button_delete"
+        android:layout_width="100dp"
+        android:layout_height="60dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
+        android:onClick="onClickDeleteButton"
+        android:text="@string/activity_dialer_delete_button_text"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/activity_dialer_button_text_message"
+        android:layout_width="100dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="8dp"
+        android:onClick="onClickTextButton"
+        android:text="@string/activity_dialer_text_button_text"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/activity_dialer_button_0"
+        android:layout_width="100dp"
+        android:layout_height="60dp"
+        android:layout_marginBottom="8dp"
+        android:onClick="onClick0Button"
+        android:text="@string/activity_dialer_0_button_text"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/activity_dialer_button_call"
+        app:layout_constraintEnd_toStartOf="@+id/activity_dialer_button_hash"
+        app:layout_constraintStart_toEndOf="@+id/activity_dialer_button_star" />
+
+    <Button
+        android:id="@+id/activity_dialer_button_star"
+        android:layout_width="100dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="8dp"
+        android:onClick="onClickStarButton"
+        android:text="@string/activity_dialer_star_button_text"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/activity_dialer_button_text_message"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/activity_dialer_button_hash"
+        android:layout_width="100dp"
+        android:layout_height="60dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
+        android:onClick="onClickHashButton"
+        android:text="@string/activity_dialer_hash_button_text"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/activity_dialer_button_delete"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/activity_dialer_button_8"
+        android:layout_width="100dp"
+        android:layout_height="60dp"
+        android:layout_marginBottom="8dp"
+        android:onClick="onClick8Button"
+        android:text="@string/activity_dialer_8_button_text"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/activity_dialer_button_0"
+        app:layout_constraintEnd_toStartOf="@+id/activity_dialer_button_9"
+        app:layout_constraintStart_toEndOf="@+id/activity_dialer_button_7" />
+
+    <Button
+        android:id="@+id/activity_dialer_button_7"
+        android:layout_width="100dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="8dp"
+        android:onClick="onClick7Button"
+        android:text="@string/activity_dialer_7_button_text"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/activity_dialer_button_star"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/activity_dialer_button_9"
+        android:layout_width="100dp"
+        android:layout_height="60dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
+        android:onClick="onClick9Button"
+        android:text="@string/activity_dialer_9_button_text"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/activity_dialer_button_hash"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/activity_dialer_button_5"
+        android:layout_width="100dp"
+        android:layout_height="60dp"
+        android:layout_marginBottom="8dp"
+        android:onClick="onClick5Button"
+        android:text="@string/activity_dialer_5_button_text"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/activity_dialer_button_8"
+        app:layout_constraintEnd_toStartOf="@+id/activity_dialer_button_6"
+        app:layout_constraintStart_toEndOf="@+id/activity_dialer_button_4" />
+
+    <Button
+        android:id="@+id/activity_dialer_button_4"
+        android:layout_width="100dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="8dp"
+        android:onClick="onClick4Button"
+        android:text="@string/activity_dialer_4_button_text"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/activity_dialer_button_7"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/activity_dialer_button_6"
+        android:layout_width="100dp"
+        android:layout_height="60dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
+        android:onClick="onClick6Button"
+        android:text="@string/activity_dialer_6_button_text"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/activity_dialer_button_9"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/activity_dialer_button_2"
+        android:layout_width="100dp"
+        android:layout_height="60dp"
+        android:layout_marginBottom="8dp"
+        android:onClick="onClick2Button"
+        android:text="@string/activity_dialer_2_button_text"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/activity_dialer_button_5"
+        app:layout_constraintEnd_toStartOf="@+id/activity_dialer_button_3"
+        app:layout_constraintStart_toEndOf="@+id/activity_dialer_button_1" />
+
+    <Button
+        android:id="@+id/activity_dialer_button_1"
+        android:layout_width="100dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="8dp"
+        android:onClick="onClick1Button"
+        android:text="@string/activity_dialer_1_button_text"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/activity_dialer_button_4"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/activity_dialer_button_3"
+        android:layout_width="100dp"
+        android:layout_height="60dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
+        android:onClick="onClick3Button"
+        android:text="@string/activity_dialer_3_button_text"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/activity_dialer_button_6"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
