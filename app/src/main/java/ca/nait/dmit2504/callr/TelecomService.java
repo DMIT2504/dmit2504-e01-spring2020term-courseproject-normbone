@@ -1,4 +1,4 @@
-package ca.nait.dmit2504.telecomapp;
+package ca.nait.dmit2504.callr;
 
 import android.telecom.Call;
 import android.telecom.InCallService;

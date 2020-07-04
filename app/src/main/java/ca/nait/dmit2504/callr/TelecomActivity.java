@@ -1,6 +1,4 @@
-package ca.nait.dmit2504.telecomapp;
-
-import androidx.appcompat.app.AppCompatActivity;
+package ca.nait.dmit2504.callr;
 
 import android.content.Context;
 import android.content.Intent;
@@ -10,6 +8,8 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.Objects;
 
@@ -62,20 +62,22 @@ public class TelecomActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        Object state = CurrentCom.state;
+
+
+
 
         mConnect.setVisibility(View.VISIBLE);
         mIgnore.setVisibility(View.GONE);
         mDisconnect.setVisibility(View.GONE);
 
         // While phone is ringing ignore button is visible
-        if (state.equals(Call.STATE_RINGING)){
+        if (CurrentCom.getCall().getState() == Call.STATE_RINGING){
             mIgnore.setVisibility(View.VISIBLE);
         }
 
         // While phone is dialing or in active call, disconnect button is visible and connect button
         // invisible
-        if (state.equals(Call.STATE_DIALING) || state.equals(Call.STATE_ACTIVE)){
+        if (CurrentCom.getCall().getState() == Call.STATE_DIALING || CurrentCom.getCall().getState() == Call.STATE_ACTIVE){
             mDisconnect.setVisibility(View.VISIBLE);
             mConnect.setVisibility(View.GONE);
         }

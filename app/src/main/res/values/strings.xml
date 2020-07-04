@@ -1,3 +1,21 @@
 <resources>
     <string name="app_name">Callr</string>
+    <string name="activity_telecom_disconnect_button_text">Disconnect</string>
+    <string name="activity_telecom_connect_button_text">Connect</string>
+    <string name="activity_telecom_ignore_button_text">Ignore</string>
+    <string name="activity_dialer_call_button_text">Call</string>
+    <string name="activity_dialer_delete_button_text">Delete</string>
+    <string name="activity_dialer_text_button_text">Text</string>
+    <string name="activity_dialer_0_button_text">0</string>
+    <string name="activity_dialer_star_button_text">*</string>
+    <string name="activity_dialer_hash_button_text">#</string>
+    <string name="activity_dialer_8_button_text">8</string>
+    <string name="activity_dialer_7_button_text">7</string>
+    <string name="activity_dialer_9_button_text">9</string>
+    <string name="activity_dialer_5_button_text">5</string>
+    <string name="activity_dialer_4_button_text">4</string>
+    <string name="activity_dialer_2_button_text">2</string>
+    <string name="activity_dialer_1_button_text">1</string>
+    <string name="activity_dialer_6_button_text">6</string>
+    <string name="activity_dialer_3_button_text">3</string>
 </resources>
