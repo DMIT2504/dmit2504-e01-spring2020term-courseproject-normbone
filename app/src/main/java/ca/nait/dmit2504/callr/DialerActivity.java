@@ -15,10 +15,8 @@ import androidx.core.app.ActivityCompat;
 import static android.telecom.TelecomManager.ACTION_CHANGE_DEFAULT_DIALER;
 import static android.telecom.TelecomManager.EXTRA_CHANGE_DEFAULT_DIALER_PACKAGE_NAME;
 
-
 public class DialerActivity extends AppCompatActivity {
 
-    private String mPhoneNumber;
     StringBuilder sb = new StringBuilder();
     TextView mDisplayedNumber;
 
@@ -31,9 +29,9 @@ public class DialerActivity extends AppCompatActivity {
 
         if (getIntent() != null && getIntent().getData() != null) {
             mDisplayedNumber.setText(getIntent().getData().getSchemeSpecificPart());
+        }else if(getIntent() != null && getIntent().hasExtra("phoneNumber")){
+            mDisplayedNumber.setText(getIntent().getStringExtra("phoneNumber"));
         }
-
-        updateDisplayedPhoneNumber();
 
     }
 
@@ -46,9 +44,12 @@ public class DialerActivity extends AppCompatActivity {
     }
 
     public void updateDisplayedPhoneNumber() {
+        mDisplayedNumber.setText(sb.toString());
+    }
 
-        mPhoneNumber = sb.toString();
-        mDisplayedNumber.setText(mPhoneNumber);
+    public void onContactList(View view) {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
     }
 
     public void onClickDeleteButton(View view) {
@@ -122,7 +123,7 @@ public class DialerActivity extends AppCompatActivity {
     }
 
     public void onClickCallButton(View view) {
-        Uri uri = Uri.parse("tel:" + mPhoneNumber.trim());
+        Uri uri = Uri.parse("tel:" + mDisplayedNumber.getText());
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
             //    ActivityCompat#requestPermissions
@@ -146,5 +147,4 @@ public class DialerActivity extends AppCompatActivity {
             startActivity(intent);
         }
     }
-
 }

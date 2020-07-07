@@ -14,7 +14,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/activity_dialer_button_2"
+        app:layout_constraintBottom_toTopOf="@+id/activity_dialer_contact_list_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
@@ -199,5 +199,17 @@
         android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/activity_dialer_button_6"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/activity_dialer_contact_list_button"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:layout_marginBottom="8dp"
+        android:onClick="onContactList"
+        android:text="@string/activity_dialer_contact_list_button_text"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/activity_dialer_button_2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

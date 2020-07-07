@@ -22,8 +22,6 @@ public class TelecomActivity extends AppCompatActivity {
     Button mConnect;
     Button mDisconnect;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,20 +37,29 @@ public class TelecomActivity extends AppCompatActivity {
         mDisconnect = findViewById(R.id.bn_activity_telecom_disconnect);
         mNumberTV = findViewById(R.id.tv_activity_telecom_number);
 
-        mConnect.setVisibility(View.VISIBLE);
-        mIgnore.setVisibility(View.GONE);
-        mDisconnect.setVisibility(View.GONE);
-
-
         // Collects the phone number data from the intent that initiated the TelecomActivity
         mPhoneNumber = Objects.requireNonNull(Objects.requireNonNull(getIntent().getData()).getSchemeSpecificPart());
 
+        // While phone is ringing ignore button is visible
+        if (CurrentCom.state.getValue() == Call.STATE_RINGING){
+            incommingCall();
+        }
+
+        // While phone is dialing or in active call, disconnect button is visible and connect button
+        // invisible
+        if (CurrentCom.state.getValue() == Call.STATE_DIALING || CurrentCom.state.getValue() == Call.STATE_ACTIVE){
+            activeCall();
+        }
     }
 
-    public void onIgnore(View view) {mCurrentCom.disconnect(); }
+    public void onIgnore(View view) {
+        mCurrentCom.disconnect();
+        this.finishAndRemoveTask();
+    }
 
     public void onDisconnect(View view) {
         mCurrentCom.disconnect();
+        this.finishAndRemoveTask();
     }
 
     public void onConnect(View view) {
@@ -63,27 +70,19 @@ public class TelecomActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
-
-
-
-        mConnect.setVisibility(View.VISIBLE);
-        mIgnore.setVisibility(View.GONE);
-        mDisconnect.setVisibility(View.GONE);
+        // Sets the internal phone number to display in the UI TextView
+        mNumberTV.setText(mPhoneNumber);
 
         // While phone is ringing ignore button is visible
-        if (CurrentCom.getCall().getState() == Call.STATE_RINGING){
-            mIgnore.setVisibility(View.VISIBLE);
+        if (CurrentCom.state.getValue() == Call.STATE_RINGING){
+            incommingCall();
         }
 
         // While phone is dialing or in active call, disconnect button is visible and connect button
         // invisible
-        if (CurrentCom.getCall().getState() == Call.STATE_DIALING || CurrentCom.getCall().getState() == Call.STATE_ACTIVE){
-            mDisconnect.setVisibility(View.VISIBLE);
-            mConnect.setVisibility(View.GONE);
+        if (CurrentCom.state.getValue() == Call.STATE_DIALING || CurrentCom.state.getValue() == Call.STATE_ACTIVE){
+            activeCall();
         }
-
-        // Sets the internal phone number to display in the UI TextView
-        mNumberTV.setText(mPhoneNumber);
 
     }
 
@@ -93,7 +92,19 @@ public class TelecomActivity extends AppCompatActivity {
     public static void start(Context context, Call call){
         Intent intent = new Intent(context, TelecomActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK).setData(call.getDetails().getHandle());
         context.startActivity(intent);
-
     }
+
+    public void incommingCall(){
+        mConnect.setVisibility(View.VISIBLE);
+        mIgnore.setVisibility(View.VISIBLE);
+        mDisconnect.setVisibility(View.GONE);
+    }
+
+    public void activeCall(){
+        mConnect.setVisibility(View.GONE);
+        mIgnore.setVisibility(View.GONE);
+        mDisconnect.setVisibility(View.VISIBLE);
+    }
+
 
 }

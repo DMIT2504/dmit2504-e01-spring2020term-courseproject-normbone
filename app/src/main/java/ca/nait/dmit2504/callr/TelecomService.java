@@ -18,6 +18,4 @@ public class TelecomService extends InCallService {
         super.onCallRemoved(call);
         new CurrentCom().setCall(null);
     }
-
-
 }

@@ -18,4 +18,13 @@
     <string name="activity_dialer_1_button_text">1</string>
     <string name="activity_dialer_6_button_text">6</string>
     <string name="activity_dialer_3_button_text">3</string>
+    <string name="activity_main_contacts_title_text">Contacts</string>
+    <string name="activity_main_add_contact_button_text">Add Contact</string>
+    <string name="activity_main_delete_button_text">Delete Contact</string>
+    <string name="activity_main_update_contact_button_text">Update Contact</string>
+    <string name="activity_main_name_input_hint">Name</string>
+    <string name="activity_main_number_input_hint">Number</string>
+    <string name="activity_main_ignore">Ignore</string>
+    <string name="activity_main_cancel_button_text">Cancel</string>
+    <string name="activity_dialer_contact_list_button_text">Contact List</string>
 </resources>
