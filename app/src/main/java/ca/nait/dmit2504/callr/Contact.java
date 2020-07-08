@@ -30,12 +30,4 @@ public class Contact {
     public void setNumber(String number) {
         mNumber = number;
     }
-
-    public String  getIgnore() {
-        return mIgnore;
-    }
-
-    public void setIgnore(String ignore) {
-        mIgnore = ignore;
-    }
 }

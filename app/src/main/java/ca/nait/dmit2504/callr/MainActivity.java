@@ -5,7 +5,6 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
@@ -18,7 +17,6 @@ private ListView mContactList;
 private ContactDatabase mContactDatabase;
 private EditText mNameInput;
 private EditText mNumberInput;
-private CheckBox mIgnoreBox;
 private Button mAddButton;
 private Button mDeleteButton;
 private Button mUpdateButton;
@@ -34,7 +32,6 @@ private long mEditId = 0;
         mContactList = findViewById(R.id.lv_activity_main_contacts);
         mNameInput = findViewById(R.id.et_activity_main_name_input);
         mNumberInput = findViewById(R.id.et_activity_main_number_input);
-        mIgnoreBox = findViewById(R.id.cb_activity_main_ignore);
         mAddButton = findViewById(R.id.btn_activity_main_add_contact);
         mDeleteButton = findViewById(R.id.btn_activity_main_delete_contact);
         mUpdateButton = findViewById(R.id.btn_activity_main_update_contact);
@@ -58,11 +55,6 @@ private long mEditId = 0;
 
                 mNameInput.setText(mContact.getName());
                 mNumberInput.setText(mContact.getNumber());
-                if (mContact.getIgnore().equals("ignore")){
-                    mIgnoreBox.setChecked(true);
-                }else {
-                    mIgnoreBox.setChecked(false);
-                }
             }
         });
 
@@ -87,11 +79,10 @@ private long mEditId = 0;
 
     private void rebindListView(){
         Cursor dbCursor = mContactDatabase.getAllContacts();
-        String[] fromFields = {"name", "number", "ignored"};
+        String[] fromFields = {"name", "number"};
         int[] toViews = new int[]{
                 R.id.tv_contact_list_name,
                 R.id.tv_contact_list_number,
-                R.id.tv_contact_list_ignore
         };
 
         SimpleCursorAdapter cursorAdapter = new SimpleCursorAdapter(this, R.layout.contact_items,
@@ -106,7 +97,7 @@ private long mEditId = 0;
         String name = mNameInput.getText().toString();
         String number = mNumberInput.getText().toString();
 
-        mContactDatabase.createContact(name, number, mIgnoreBox.isChecked());
+        mContactDatabase.createContact(name, number);
 
         rebindListView();
     }
@@ -121,7 +112,7 @@ private long mEditId = 0;
         String name = mNameInput.getText().toString();
         String number = mNumberInput.getText().toString();
 
-        mContactDatabase.updateContact(mEditId, name, number, mIgnoreBox.isChecked());
+        mContactDatabase.updateContact(mEditId, name, number);
 
         rebindListView();
     }

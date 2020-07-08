@@ -24,7 +24,6 @@
     <string name="activity_main_update_contact_button_text">Update Contact</string>
     <string name="activity_main_name_input_hint">Name</string>
     <string name="activity_main_number_input_hint">Number</string>
-    <string name="activity_main_ignore">Ignore</string>
     <string name="activity_main_cancel_button_text">Cancel</string>
     <string name="activity_dialer_contact_list_button_text">Contact List</string>
 </resources>
