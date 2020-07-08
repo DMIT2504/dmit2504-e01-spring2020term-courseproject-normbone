@@ -124,4 +124,5 @@ private long mEditId = 0;
         mUpdateButton.setVisibility(View.GONE);
         mCancelButton.setVisibility(View.GONE);
     }
+
 }

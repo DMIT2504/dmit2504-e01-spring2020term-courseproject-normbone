@@ -8,9 +8,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import java.util.Objects;
 
 public class TelecomActivity extends AppCompatActivity {
@@ -22,6 +20,7 @@ public class TelecomActivity extends AppCompatActivity {
     Button mConnect;
     Button mDisconnect;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,7 +28,9 @@ public class TelecomActivity extends AppCompatActivity {
 
         mCurrentCom = new CurrentCom();
 
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED |WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON |WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED
+                |WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON
+                |WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD
                 | WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON);
 
         mIgnore = findViewById(R.id.bn_activity_telecom_ignore);
@@ -40,20 +41,10 @@ public class TelecomActivity extends AppCompatActivity {
         // Collects the phone number data from the intent that initiated the TelecomActivity
         mPhoneNumber = Objects.requireNonNull(Objects.requireNonNull(getIntent().getData()).getSchemeSpecificPart());
 
-        // While phone is ringing ignore button is visible
-        if (CurrentCom.state.getValue() == Call.STATE_RINGING){
-            incommingCall();
-        }
-
-        // While phone is dialing or in active call, disconnect button is visible and connect button
-        // invisible
-        if (CurrentCom.state.getValue() == Call.STATE_DIALING || CurrentCom.state.getValue() == Call.STATE_ACTIVE){
-            activeCall();
-        }
     }
 
     public void onIgnore(View view) {
-        mCurrentCom.disconnect();
+        mCurrentCom.ignore();
         this.finishAndRemoveTask();
     }
 
@@ -64,33 +55,22 @@ public class TelecomActivity extends AppCompatActivity {
 
     public void onConnect(View view) {
         mCurrentCom.connect();
+        checkStatus();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-
-        // Sets the internal phone number to display in the UI TextView
-        mNumberTV.setText(mPhoneNumber);
-
-        // While phone is ringing ignore button is visible
-        if (CurrentCom.state.getValue() == Call.STATE_RINGING){
-            incommingCall();
-        }
-
-        // While phone is dialing or in active call, disconnect button is visible and connect button
-        // invisible
-        if (CurrentCom.state.getValue() == Call.STATE_DIALING || CurrentCom.state.getValue() == Call.STATE_ACTIVE){
-            activeCall();
-        }
-
+        checkStatus();
     }
 
     // Called by the TelecomService to start the TelecomActivity, flags it as activate to move it
     // to the top of the stack.  Accepts a Call object containing details about the call as well
     // as its affiliated phone number.
     public static void start(Context context, Call call){
-        Intent intent = new Intent(context, TelecomActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK).setData(call.getDetails().getHandle());
+        Intent intent = new Intent(context, TelecomActivity.class)
+                .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                .setData(call.getDetails().getHandle());
         context.startActivity(intent);
     }
 
@@ -106,5 +86,16 @@ public class TelecomActivity extends AppCompatActivity {
         mDisconnect.setVisibility(View.VISIBLE);
     }
 
+    public void checkStatus(){
+        // Sets the internal phone number to display in the UI TextView
+        mNumberTV.setText(mPhoneNumber);
 
+        if (CurrentCom.state.getValue() == Call.STATE_DIALING
+                || CurrentCom.state.getValue() == Call.STATE_ACTIVE
+                || CurrentCom.state.getValue() == Call.STATE_CONNECTING){
+            activeCall();
+        }else if (CurrentCom.state.getValue() == Call.STATE_RINGING){
+            incommingCall();
+        }
+    }
 }

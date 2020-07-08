@@ -33,71 +33,40 @@ class ContactDatabase extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public long createContact(String name, String number) {
+    public void createContact(String name, String number) {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(COLUMN_NAME, name);
         values.put(COLUMN_NUMBER, number);
-        return db.insert(TABLE_CONTACTS, null, values);
+        db.insert(TABLE_CONTACTS, null, values);
     }
 
     public Cursor getAllContacts(){
         SQLiteDatabase db = getReadableDatabase();
         String queryStatement = "SELECT " + BaseColumns._ID + ", "
-                + COLUMN_NAME + ", " + COLUMN_NUMBER + " FROM " + TABLE_CONTACTS + " ORDER BY " + COLUMN_NAME + " DESC";
-
+                + COLUMN_NAME + ", " + COLUMN_NUMBER + " FROM " + TABLE_CONTACTS + " ORDER BY "
+                + COLUMN_NAME + " DESC";
         return db.rawQuery(queryStatement, null);
     }
 
-    public Boolean isInContacts(String phoneNumber){
-        Boolean isIn = false;
-        SQLiteDatabase db = getReadableDatabase();
-        String queryStatement = "SELECT " + COLUMN_NUMBER + " FROM " + TABLE_CONTACTS + " ORDER BY " + COLUMN_NUMBER + " DESC";
-
-        Cursor cursor =  db.rawQuery(queryStatement, null);
-
-        String contactNumbers[] = new String[cursor.getCount()];
-
-        for (int i = 0; i < cursor.getCount(); i++){
-            if (i > 0){
-                cursor.moveToNext();
-                contactNumbers[i] = cursor.getString(i);
-
-            }else{
-                contactNumbers[i] = cursor.getString(i);
-            }
-        }
-        cursor.close();
-
-        for (int i = 0; i < contactNumbers.length; ++i){
-            if (contactNumbers[i].equals(phoneNumber)){
-                isIn = true;
-            }
-        }
-
-        return isIn;
-    }
-
-
     public void deleteContact(long id){
         SQLiteDatabase db = getWritableDatabase();
-
         db.delete(TABLE_CONTACTS, BaseColumns._ID + " = ?", new String[]{String.valueOf(id)});
     }
 
-    public int updateContact(long id, String name, String number) {
+    public void updateContact(long id, String name, String number) {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues values = new ContentValues();
-
         values.put(COLUMN_NAME, name);
         values.put(COLUMN_NUMBER, number);
-        return db.update(TABLE_CONTACTS, values, BaseColumns._ID + " = ?", new String[] {String.valueOf(id)});
+        db.update(TABLE_CONTACTS, values, BaseColumns._ID + " = ?", new String[]{String.valueOf(id)});
     }
 
     public Contact findContact(long id) {
         Contact singleResult = null;
         SQLiteDatabase db = getReadableDatabase();
-        String queryStatement = "SELECT " + BaseColumns._ID + ", " + COLUMN_NAME + ", " + COLUMN_NUMBER + " FROM " + TABLE_CONTACTS + " WHERE " + BaseColumns._ID + " = ?";
+        String queryStatement = "SELECT " + BaseColumns._ID + ", " + COLUMN_NAME + ", " + COLUMN_NUMBER + " FROM "
+                + TABLE_CONTACTS + " WHERE " + BaseColumns._ID + " = ?";
         Cursor cursor = db.rawQuery(queryStatement, new String[] {String.valueOf(id)});
 
         if (cursor.getCount() == 1)
@@ -111,6 +80,4 @@ class ContactDatabase extends SQLiteOpenHelper {
         cursor.close();
         return singleResult;
     }
-
-
 }

@@ -5,7 +5,6 @@ public class Contact {
     private long mId;
     private String mName;
     private String mNumber;
-    private String mIgnore;
 
     public long getId() {
         return mId;

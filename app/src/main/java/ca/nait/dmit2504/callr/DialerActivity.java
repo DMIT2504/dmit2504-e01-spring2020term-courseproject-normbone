@@ -32,7 +32,7 @@ public class DialerActivity extends AppCompatActivity {
         }else if(getIntent() != null && getIntent().hasExtra("phoneNumber")){
             mDisplayedNumber.setText(getIntent().getStringExtra("phoneNumber"));
         }
-
+        offerReplacingDefaultDialer();
     }
 
     @Override
@@ -132,10 +132,12 @@ public class DialerActivity extends AppCompatActivity {
             //                                          int[] grantResults)
             // to handle the case where the user grants the permission. See the documentation
             // for ActivityCompat#requestPermissions for more details.
+
             return;
         }
         startActivity(new Intent(Intent.ACTION_CALL, uri));
     }
+
 
     private void offerReplacingDefaultDialer() {
         TelecomManager telecomManager = (TelecomManager) getSystemService(TELECOM_SERVICE);

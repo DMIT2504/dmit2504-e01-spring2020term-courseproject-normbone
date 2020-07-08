@@ -5,19 +5,11 @@ import android.telecom.InCallService;
 
 public class TelecomService extends InCallService {
 
-    ContactDatabase mContactDatabase = new ContactDatabase(this);
-
     @Override
     public void onCallAdded(Call call){
         super.onCallAdded(call);
-
-        if (mContactDatabase.isInContacts(call.getDetails().getHandle().toString().trim())){
-            new CurrentCom().setCall(call);
-            TelecomActivity.start(this, call);
-        }else {
-            call.disconnect();
-        }
-
+        new CurrentCom().setCall(call);
+        TelecomActivity.start(this, call);
     }
 
     @Override

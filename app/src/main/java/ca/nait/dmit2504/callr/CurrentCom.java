@@ -2,9 +2,7 @@ package ca.nait.dmit2504.callr;
 
 import android.telecom.Call;
 import android.telecom.VideoProfile;
-
 import androidx.annotation.Nullable;
-
 import io.reactivex.subjects.BehaviorSubject;
 
 public class CurrentCom {
@@ -49,6 +47,12 @@ public class CurrentCom {
     public void disconnect() {
         assert call != null;
         call.disconnect();
+    }
+
+    // Rejects the call, option to add a response message.
+    public void ignore(){
+        assert call != null;
+        call.reject(false, "");
     }
 
 }
